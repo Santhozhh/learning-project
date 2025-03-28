@@ -5,6 +5,8 @@ import React from 'react'
 interface User {
   id : number;
   name  : string;
+  email : string;
+  phone : string;
 }
 const Userspage = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users', {next :{revalidate : 1 }})
@@ -14,9 +16,22 @@ const Userspage = async () => {
     <div>
       <h1>Users</h1>
       <p>{new Date().toLocaleTimeString()}</p>
-      <ul>
-        {users.map(abc=><li key={abc.id}>{abc.name}</li>)}
-      </ul>
+      <table className='table table-bordered'>
+        <thead>
+          <tr>
+            <th>name </th>
+            <th>Email</th>
+            <th> Address</th>
+          </tr>
+        </thead> 
+        <tbody>
+        {users.map(abc=><tr  key={abc.id}>
+          <td>{abc.name}</td>
+          <td>{abc.email}</td>
+          <td> {abc.phone}</td>
+        </tr >)}
+        </tbody>
+      </table>
     </div>
   )
 }
